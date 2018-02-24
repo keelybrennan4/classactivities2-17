@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scope</title>
+</head>
+<body>
+
+  <h2>Check console to see the madness!</h2>
+
+  <script>
+    var outerFunction = function() {
+
+      var x = 5;
+
+      var nestedFunction = function() {
+
+        var y = 7;
+
+        // What will this print? A) X: 5  because var x is defined in the global scope
+        console.log("X: " + x);
+
+        // What will this print? A) Y: 7  because var y is defined in a parent scope of this console.log
+        console.log("Y: " + y);
+
+        var z = 10;
+        // What will this print? A) Z (inside): + 10  
+        // because var z is defined in the same scope as this console.log. "Z (inside)" is just a string that will print, too. 
+        console.log("Z (inside): " + z); 
+      };
+
+      return nestedFunction;
+    };
+
+    var myFunction = outerFunction();
+    myFunction();
+
+    // What will this print? A) undefined because the child scope that var z is defined in is not accessible from this scope(the global scope)
+    console.log("Z (outside): " + z);
+
+</script>
+
+</body>
+</html>
