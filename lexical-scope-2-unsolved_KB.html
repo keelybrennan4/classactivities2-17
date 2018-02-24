@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Closure</title>
+</head>
+<body>
+  <h2>Check console to see the madness!</h2>
+
+  <script>
+    var cat = {
+      name: "Gus",
+      color: "gray",
+      age: 15,
+
+      printInfo: function() {
+        console.log("inside printInfo()");
+
+        // What will this print? A) inside printInfo()  
+        //because printInfo is a property on object cat, so the property can use "this" to  access the object. 
+        // just above, the property printInfo evaluated to "inside printInfo()", so it will do the same again here. 
+        console.log(this);
+
+        // What will this print? A) Name: Gus, Color: Gray, Age: 15 
+        // because Name, Color and Age are all properties on the object cat 
+        console.log("Name:", this.name, "Color:", this.color, "Age:", this.age);
+
+        var nestedFunction = function() {
+          console.log("inside nestedFunction()");
+
+          // What will this print? A) inside nestedFunction()
+          // because the variable nestedFunction is not a property of object cat, and therefore, cannot access cat the object using "this"
+          // this is referring to what the function nestedFunction evaluates to, which is "inside nestedFunction"()
+          console.log(this);
+
+          // What will this print? A) undefined 
+          // because "this" is now referring to inside nestedFunction()which doesnt have the same properties as the object cat, and cannot access cat since it's outside of the local scope. 
+          console.log("Name:", this.name, "Color:", this.color, "Age:", this.age);
+        };
+
+        nestedFunction();
+      }
+    };
+
+    // calls the printInfo function. Which subsequently calls the nestedFunction()
+    cat.printInfo();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lexical Scope</title>
+</head>
+<body>
+
+  <h2>Let's Talk About Scope!</h2>
+
+  <script type="text/javascript">
+
+    // Example One: Global Scope
+    // -------------------------------------------
+    var a = 1;
+    function one() {
+      alert("One: " + a);
+    }
+
+    // What will get alerted? A) One: 1
+    one();
+
+    // Example Two: Local Scope
+    // -------------------------------------------
+    function twotop() {
+
+      function two(a) {
+        alert("Two: " + a);
+      }
+
+      two(a);
+    }
+
+    // What will get alerted? 1 because a = 1 is in the global scope, and a is not redefined within the function for a different value. 
+    twotop();
+
+    // Example Three: Local Scope
+    // -------------------------------------------
+    var a = 5;
+    function three() {
+
+      var a = 3;
+      alert("Three: " + a);
+    }
+
+    // What will get alerted? Three: 3 because when a is defined as 3 inside the function, a takes the value of 3 while executing the function.
+    three();
+
+    // Example Four: Local Scope
+    // -------------------------------------------
+    function first() {
+      var a = 5;
+
+      function second() {
+        var a = 3;
+
+        function third() {
+          alert("Four: " + a);
+        }
+
+        third();
+      }
+
+      second();
+
+      alert("Five: " + a);
+    }
+
+    // What will get alerted? A) Five: 5 because we're evaluating function first which is 5. 
+    first();
+
+  </script>
+</body>
+</html>
